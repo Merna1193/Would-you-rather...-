@@ -6,8 +6,32 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-
+.margin20{
+  margin-top: 20px;
+}
+.navbar{
+  margin-bottom: 20px;
+}
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+.dashboard-list{
+  list-style: none;
+  text-align: center;
+}
+.card-img{
+  width: 100px !important;
+  height: 100px;
+  border-radius: 50% !important;
+  float: left;
+}
+.card{
+  width: 50%;
+  margin-bottom: 10px;
+}
+.navAvatar{
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
 }

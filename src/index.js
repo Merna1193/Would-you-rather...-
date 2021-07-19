@@ -1,13 +1,30 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
+import 'bootstrap/dist/css/bootstrap.min.css'
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { createStore,compose  } from 'redux';
+import { Provider } from 'react-redux';
+import reducer from './reducers'
+import middleware from './middleware'
+
+const composeEnhancers =
+  typeof window === 'object' &&
+    window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ ?
+    window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({
+      // Specify extension’s options like name, actionsBlacklist, actionsCreators, serialize...
+    }) : compose;
+
+const enhancer = composeEnhancers(middleware);
+const store = createStore(reducer, enhancer);
 
 ReactDOM.render(
-  <React.StrictMode>
+  <Provider store={store}>
+
     <App />
-  </React.StrictMode>,
+
+  </Provider>,
   document.getElementById('root')
 );
 

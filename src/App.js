@@ -1,25 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { Component, Fragment } from 'react';
+import { connect } from 'react-redux';
+import Login from './components/login';
+import ComponentApp from './components/ComponentApp';
+import { handleInitialData } from './actions/shared'
+import { LoadingBar } from 'react-redux-loading-bar'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+    componentDidMount() {
+        this.props.dispatch(handleInitialData())
+    }
+    render() {
+        const { authedUser, loadingBar } = this.props;
+
+        if (loadingBar.default === undefined || loadingBar.default === 1) {
+            //loading
+            return (
+                <LoadingBar />
+            );
+        } else {
+            return <Fragment>{!authedUser ? <Login /> : <ComponentApp />}</Fragment>;
+        }
+    }
 }
 
-export default App;
+function mapStateToProps({ authedUser, loadingBar }) {
+    return {
+        authedUser,
+        loadingBar
+    };
+}
+
+export default connect(mapStateToProps)(App);
